@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ocrace</string>
+    <string name="accept_button">ACCEPT</string>
+    <string name="clear_button">CLEAR</string>
+</resources>
