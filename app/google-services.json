@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "661644324530",
+    "firebase_url": "https://racechart-ece09-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "racechart-ece09",
+    "storage_bucket": "racechart-ece09.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661644324530:android:afe8ea6a938f01b51763ab",
+        "android_client_info": {
+          "package_name": "ru.ocrace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661644324530-bjcpafua2098al1tgkdk42ud5jsga946.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmuDaL8P5XH9Rd1Wbke-lY23K7dEB7fjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661644324530-bjcpafua2098al1tgkdk42ud5jsga946.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661644324530:android:cfc94c1ddfe2ed621763ab",
+        "android_client_info": {
+          "package_name": "ru.s2race"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661644324530-bjcpafua2098al1tgkdk42ud5jsga946.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmuDaL8P5XH9Rd1Wbke-lY23K7dEB7fjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661644324530-bjcpafua2098al1tgkdk42ud5jsga946.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

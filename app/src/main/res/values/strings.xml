@@ -2,4 +2,10 @@
     <string name="app_name">ocrace</string>
     <string name="accept_button">ACCEPT</string>
     <string name="clear_button">CLEAR</string>
+    <string name="sex_male">MALE</string>
+    <string name="sex_female">FEMALE</string>
+    <string name="enter_name">Enter name</string>
+    <string name="enter_surname">Enter surname</string>
+    <string name="enter_second_name">Enter second name</string>
+    <string name="enter_birth">Enter birth date</string>
 </resources>
