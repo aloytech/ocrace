@@ -6,12 +6,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class NumberAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
-    override fun getItemCount(): Int = 3
+    override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
         when (position) {
             1 -> {
-                val fragment = PersonsFragment()
+                val fragment = PersonFragment()
 
                 fragment.arguments = Bundle().apply {
                     putInt(ARG_PERSON, position + 1)

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">ocrace</string>
+
+    <string name="db_table_persons">Persons</string>
+
     <string name="accept_button">ACCEPT</string>
     <string name="clear_button">CLEAR</string>
     <string name="sex_male">MALE</string>

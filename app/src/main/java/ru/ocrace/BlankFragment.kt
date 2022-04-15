@@ -23,8 +23,6 @@ class BlankFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.takeIf { it.containsKey(ARG_BLANK) }?.apply {
-            val textView: TextView = view.findViewById(R.id.textView)
-            textView.text = getInt(ARG_BLANK).toString()
         }
     }
 

@@ -1,19 +1,37 @@
 package ru.ocrace
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.ListView
+import android.util.Log
+import android.view.View
+import android.widget.*
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import java.util.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+
 
 
 class MainActivity : FragmentActivity() {
+    //elements of tab system
     private lateinit var adapter: NumberAdapter
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
+
+    //elements of PERSON tab
+    //private lateinit var inputName: EditText
+    //private lateinit var inputSurname: EditText
+    //private lateinit var inputSecondName: EditText
+    //private lateinit var inputBirth: EditText
+    //@SuppressLint("UseSwitchCompatOrMaterialCode")
+    //private lateinit var inputSex: Switch
+    private lateinit var buttonAccept: Button
+
+    //firebase
+    private val database = Firebase.database
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +54,54 @@ class MainActivity : FragmentActivity() {
         }.attach()
     }
     private fun initPersonTab(){
-        val personList: ListView = findViewById(R.id.person_list)
-        var persons = mutableListOf<Person>()
-        persons.add(0,Person(0,"Alexey","Potapov","Andreevich", "22.05.1984"))
-        persons.add(1,Person(1,"Slava","Toldo","Andreevich", "22.05.1984"))
-        val personStringList = listOf<String>(persons[0].toString(),persons[1].toString())
-        val adapter: ArrayAdapter<String> = ArrayAdapter(this,android.R.layout.simple_list_item_1,personStringList)
-        personList.adapter = adapter
+        //inputName = findViewById(R.id.input_name)
+        //inputSurname = findViewById(R.id.input_surname)
+        //inputSecondName = findViewById(R.id.input_second_name)
+        //inputBirth = findViewById(R.id.input_birth)
+        //inputSex = findViewById(R.id.switch_sex)
+
+        buttonAccept = findViewById(R.id.accept_button)
+        //buttonAccept.setOnClickListener(listener)
     }
+    private val listener = View.OnClickListener {
+        when (it.id){
+            R.id.accept_button ->{
+                //onClickAccept()
+            }
+        }
+    }
+
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    fun onClickAccept(view: View){
+        //val name = inputName.text.toString()
+        val name:EditText = findViewById(R.id.input_name)
+        //val surname = inputSurname.text.toString()
+        //val secondName = inputSecondName.text.toString()
+        //val birth = inputBirth.text.toString()
+        //val sex = inputSex.isChecked
+        val surname : EditText = findViewById(R.id.input_surname)
+        val secondName: EditText = findViewById(R.id.input_second_name)
+        val birth: EditText = findViewById(R.id.input_birth)
+        //val sex:Switch = findViewById(R.id.switch_sex)
+        writePerson(Person(
+            name = name.text.toString(),
+            surname = surname.text.toString(),
+            secondName = secondName.text.toString(),
+            birthDate = birth.text.toString(),
+            isFemale = false
+        ))
+    }
+    private fun writePerson(person: Person){
+        val dbRef = database.getReference(R.string.db_table_persons.toString())
+
+        val userId = dbRef.push().key
+        if (userId != null) {
+            val pushPerson = Person(
+                userId,person.name,person.surname,person.secondName,person.birthDate,person.isFemale)
+            dbRef.child(userId).setValue(pushPerson)
+        } else{
+            Log.w("add person", "bad push key")
+        }
+    }
+
 }
