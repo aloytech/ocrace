@@ -19,14 +19,6 @@ class MainActivity : FragmentActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
 
-    //elements of PERSON tab
-    //private lateinit var inputName: EditText
-    //private lateinit var inputSurname: EditText
-    //private lateinit var inputSecondName: EditText
-    //private lateinit var inputBirth: EditText
-    //@SuppressLint("UseSwitchCompatOrMaterialCode")
-    //private lateinit var inputSex: Switch
-    lateinit var buttonAccept: Button
 
     //firebase
     private val database = Firebase.database
@@ -45,22 +37,7 @@ class MainActivity : FragmentActivity() {
 
     }
 
-    private val summaryListener = object : ValueEventListener {
-        override fun onDataChange(snapshot: DataSnapshot) {
-            summary = snapshot.value as Summary
-        }
 
-        override fun onCancelled(error: DatabaseError) {
-            TODO("Not yet implemented")
-        }
-
-    }
-
-    private fun getIndexesFromFB() {
-        val dbRefSummary = database.getReference(dbTableSummary)
-        //database.reference.child(dbTableSummary).get().addOnSuccessListener { summary = it.value as Summary }
-        dbRefSummary.addValueEventListener(summaryListener)
-    }
 
     val childEventListener = object : ChildEventListener {
         override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {

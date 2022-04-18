@@ -6,9 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ToggleButton
+import android.widget.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -29,6 +30,10 @@ class PersonFragment : Fragment() {
     private lateinit var inputMiddleName: EditText
     private lateinit var inputBirth: EditText
     private lateinit var inputSex: ToggleButton
+
+    private lateinit var listViewPersons: ListView
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +62,36 @@ class PersonFragment : Fragment() {
         buttonAccept = view.findViewById(R.id.accept_button)
         buttonAccept.setOnClickListener(listener)
 
+        listViewPersons = view.findViewById(R.id.person_list)
+        getUsersFromFB(view)
+        //val listAdapter = ArrayAdapter(view.context, android.R.layout.simple_list_item_1,listPersons)
+        //listViewPersons.adapter = listAdapter
+
+    }
+
+    private fun getUsersFromFB(view: View) {
+        val userListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val listPersons = mutableListOf<String>()
+                for (user in snapshot.children){
+                    val personSurname = user.child("surname").value.toString()
+                    val personName = user.child("name").value.toString()
+                    val personBirthDate = user.child("birthDate").value.toString()
+
+                    listPersons.add("$personSurname $personName $personBirthDate")
+                }
+                val listAdapter = ArrayAdapter(view.context, android.R.layout.simple_list_item_1,listPersons)
+                listViewPersons.adapter = listAdapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        }
+        val dbChildPerson = database.getReference(dbTablePersons)
+        //database.reference.child(dbTableSummary).get().addOnSuccessListener { summary = it.value as Summary }
+        dbChildPerson.addValueEventListener(userListener)
     }
 
     private val listener = View.OnClickListener {
