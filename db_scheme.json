@@ -1,0 +1,63 @@
+{
+  "Summary": {
+  }
+  "Persons":{
+	  "1":{
+		  "name": "Alexey"
+		  "surname": "Potapov"
+		  "secondName": "Andreevich"
+		  "birth": "22.05.1984"
+		  "isMale": "true"
+	  }
+	  "2":{
+	  }
+  }
+  "Races":{
+	 "1":{
+		 "raceName": "Neo-g"
+		 "raceDate": "13.04.2022"
+		 "categories":{
+			 "ageTo29":{
+				 "stages":{
+					"Ninja":{
+						"participants":{
+							"1":{
+								"personId": "1"
+								"startTime": "9:00:00"
+								"finishTime": "9:45:32"
+								"abstacleFaults":{
+									"2"
+									"4"
+								 }
+						 
+							 }
+						 }
+					}
+					"OCR":
+					"Trail":
+					"FIT":
+				 }
+				 
+			 }
+			 "ageTo34":{
+				 
+			 }
+			 "ageTo39":{
+				 
+			 }
+			 "age40":{
+				 
+			 }
+		 }
+		 
+		 "ostacles":{
+			 "1":{
+				 "obstacleName": "Zabor"
+			 }
+			 "2":{
+				 "obstacleName": "Setka"
+			 }
+		 }
+	 }
+  }
+}

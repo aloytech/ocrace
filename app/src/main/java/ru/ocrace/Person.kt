@@ -7,10 +7,10 @@ data class Person(
     val surname: String? = null,
     val secondName: String? = null,
     val birthDate: String? = null,
-    val isFemale: Boolean? = null
+    val isMale: Boolean? = null
 ) {
     override fun toString():String{
-        val sex = if (isFemale == true){"F"} else {"M"}
+        val sex = if (isMale == true){"M"} else {"F"}
         return "$id $surname $name $birthDate $sex"
     }
 }
