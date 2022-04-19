@@ -13,5 +13,6 @@
     <string name="enter_surname">Enter surname</string>
     <string name="enter_middle_name">Enter middle name</string>
     <string name="enter_birth">Enter birth date</string>
+    <string name="index_label">NUM:</string>
 
 </resources>

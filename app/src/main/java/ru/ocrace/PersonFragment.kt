@@ -17,12 +17,12 @@ import com.google.firebase.ktx.Firebase
 const val ARG_PERSON = "person"
 
 class PersonFragment : Fragment() {
-    lateinit var buttonAccept: Button
+
     //firebase
     private val database = Firebase.database
     private val dbTablePersons = "Persons"
     private val dbTableSummary = "Summary"
-    private var summary = Summary()
+    private var summary: Summary? = null
 
     //elements of PERSON tab
     private lateinit var inputName: EditText
@@ -33,16 +33,14 @@ class PersonFragment : Fragment() {
 
     private lateinit var listViewPersons: ListView
 
-
+    private lateinit var buttonAccept: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.persons_frag, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,34 +61,46 @@ class PersonFragment : Fragment() {
         buttonAccept.setOnClickListener(listener)
 
         listViewPersons = view.findViewById(R.id.person_list)
-        getUsersFromFB(view)
-        //val listAdapter = ArrayAdapter(view.context, android.R.layout.simple_list_item_1,listPersons)
-        //listViewPersons.adapter = listAdapter
 
+        getUsersFromFB(view)
+        getSummaryFromFB(view)
+
+    }
+
+    private fun getSummaryFromFB(view: View) {
+        val summaryListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val indexLabel: TextView = view.findViewById(R.id.label_index)
+                indexLabel.text = snapshot.child("indexPerson").value.toString()
+                summary = snapshot.getValue(Summary::class.java)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("FireBase", "Get from summary fail")
+            }
+        }
+        val dbRefSummary = database.getReference(dbTableSummary)
+        dbRefSummary.addValueEventListener(summaryListener)
     }
 
     private fun getUsersFromFB(view: View) {
         val userListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val listPersons = mutableListOf<String>()
-                for (user in snapshot.children){
-                    val personSurname = user.child("surname").value.toString()
-                    val personName = user.child("name").value.toString()
-                    val personBirthDate = user.child("birthDate").value.toString()
-
-                    listPersons.add("$personSurname $personName $personBirthDate")
+                for (user in snapshot.children) {
+                    val person = user.getValue(Person::class.java)
+                    listPersons.add(person.toString())
                 }
-                val listAdapter = ArrayAdapter(view.context, android.R.layout.simple_list_item_1,listPersons)
+                val listAdapter =
+                    ArrayAdapter(view.context, android.R.layout.simple_list_item_1, listPersons)
                 listViewPersons.adapter = listAdapter
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.w("FireBase", "Get from persons fail")
             }
-
         }
         val dbChildPerson = database.getReference(dbTablePersons)
-        //database.reference.child(dbTableSummary).get().addOnSuccessListener { summary = it.value as Summary }
         dbChildPerson.addValueEventListener(userListener)
     }
 
@@ -108,7 +118,6 @@ class PersonFragment : Fragment() {
         val secondName = inputMiddleName.text.toString()
         val birth = inputBirth.text.toString()
         val sex = inputSex.isChecked
-        //database.reference.child(dbTableSummary).get().addOnSuccessListener { summary = it.value as Summary }
 
         writePerson(
             Person(
@@ -123,14 +132,18 @@ class PersonFragment : Fragment() {
 
     private fun writePerson(person: Person) {
         val dbRefPersons = database.getReference(dbTablePersons)
-
-
         val userId = dbRefPersons.push().key
         if (userId != null) {
-            val pushPerson = person.copy(id = userId.toString())
-            dbRefPersons.child(userId.toString()).setValue(pushPerson)
+            val userIndex = summary?.indexPerson
+            if (userIndex != null) {
+                summary?.indexPerson = userIndex + 1
+                val dbRefSummary = database.getReference(dbTableSummary)
+                dbRefSummary.child("indexPerson").setValue(userIndex + 1)
+            }
+            val pushPerson = person.copy(id = userIndex.toString())
+            dbRefPersons.child(userIndex.toString()).setValue(pushPerson)
         } else {
-            Log.w("add person", "bad push key")
+            Log.w("FireBase", "Push to persons fail")
         }
     }
 
