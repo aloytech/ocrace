@@ -19,47 +19,10 @@ class MainActivity : FragmentActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
 
-
-    //firebase
-    private val database = Firebase.database
-    private val dbTablePersons = "Persons"
-    private val dbTableSummary = "Summary"
-    private var summary = Summary()
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         initTabs()
-        //initPersonTab()
-        //getIndexesFromFB()
-
-    }
-
-
-
-    val childEventListener = object : ChildEventListener {
-        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onChildRemoved(snapshot: DataSnapshot) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onCancelled(error: DatabaseError) {
-            TODO("Not yet implemented")
-        }
-
     }
 
     private fun initTabs() {
@@ -73,8 +36,5 @@ class MainActivity : FragmentActivity() {
             tab.text = tabNameList[position]
         }.attach()
     }
-
-
-
 }
 

@@ -17,8 +17,8 @@
         android:text="@string/sex_label"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/input_birth"
-        app:layout_constraintBaseline_toBaselineOf="@id/input_birth" />
+        app:layout_constraintBaseline_toBaselineOf="@id/input_birth"
+        app:layout_constraintStart_toEndOf="@id/input_birth" />
 
     <TextView
         android:id="@+id/label_index"
@@ -31,8 +31,8 @@
         android:text="@string/index_label"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/input_name"
-        app:layout_constraintBaseline_toBaselineOf="@id/input_name" />
+        app:layout_constraintBaseline_toBaselineOf="@id/input_name"
+        app:layout_constraintStart_toEndOf="@id/input_name" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -42,8 +42,7 @@
         android:layout_margin="50dp"
         android:text="@string/accept_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/clear_button"
@@ -119,8 +118,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="100dp"
         android:layout_marginTop="260dp"
+        android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_birth" />
 

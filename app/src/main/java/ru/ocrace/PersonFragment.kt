@@ -125,7 +125,7 @@ class PersonFragment : Fragment() {
                 surname = surname,
                 secondName = secondName,
                 birthDate = birth,
-                isMale = sex
+                male = sex
             )
         )
     }
