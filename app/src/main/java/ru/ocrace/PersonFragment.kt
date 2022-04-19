@@ -65,6 +65,7 @@ class PersonFragment : Fragment() {
         getUsersFromFB(view)
         getSummaryFromFB(view)
 
+
     }
 
     private fun getSummaryFromFB(view: View) {
