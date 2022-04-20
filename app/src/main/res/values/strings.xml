@@ -6,6 +6,8 @@
     //persons fragment
     <string name="accept_button">ACCEPT</string>
     <string name="clear_button">CLEAR</string>
+    <string name="create_button">CREATE</string>
+    <string name="delete_button">DELETE</string>
     <string name="sex_male">MALE</string>
     <string name="sex_female">FEMALE</string>
     <string name="sex_label">SEX:</string>
@@ -13,6 +15,7 @@
     <string name="enter_surname">Enter surname</string>
     <string name="enter_middle_name">Enter middle name</string>
     <string name="enter_birth">Enter birth date</string>
+    <string name="enter_date">Enter date</string>
     <string name="index_label">NUM:</string>
 
 </resources>

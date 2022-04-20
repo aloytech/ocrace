@@ -10,19 +10,8 @@ import android.widget.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-
-
-const val ARG_PERSON = "person"
 
 class PersonFragment : Fragment() {
-
-    //firebase
-    private val database = Firebase.database
-    private val dbTablePersons = "Persons"
-    private val dbTableSummary = "Summary"
-    private var summary: Summary? = null
 
     //elements of PERSON tab
     private lateinit var inputName: EditText
@@ -30,6 +19,7 @@ class PersonFragment : Fragment() {
     private lateinit var inputMiddleName: EditText
     private lateinit var inputBirth: EditText
     private lateinit var inputSex: ToggleButton
+    private lateinit var indexLabel: TextView
 
     private lateinit var listViewPersons: ListView
 
@@ -44,7 +34,7 @@ class PersonFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        arguments?.takeIf { it.containsKey(ARG_PERSON) }?.apply {
+        arguments?.takeIf { it.containsKey(dbTablePersons) }?.apply {
         }
         initPersonTab(view)
 
@@ -61,29 +51,15 @@ class PersonFragment : Fragment() {
         buttonAccept.setOnClickListener(listener)
 
         listViewPersons = view.findViewById(R.id.person_list)
+        indexLabel = view.findViewById(R.id.label_index)
+
 
         getUsersFromFB(view)
-        getSummaryFromFB(view)
+        getSummaryFromFB()
 
+        indexLabel.text = summary?.indexPerson.toString()
 
     }
-
-    private fun getSummaryFromFB(view: View) {
-        val summaryListener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val indexLabel: TextView = view.findViewById(R.id.label_index)
-                indexLabel.text = snapshot.child("indexPerson").value.toString()
-                summary = snapshot.getValue(Summary::class.java)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.w("FireBase", "Get from summary fail")
-            }
-        }
-        val dbRefSummary = database.getReference(dbTableSummary)
-        dbRefSummary.addValueEventListener(summaryListener)
-    }
-
     private fun getUsersFromFB(view: View) {
         val userListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -143,6 +119,7 @@ class PersonFragment : Fragment() {
             }
             val pushPerson = person.copy(id = userIndex.toString())
             dbRefPersons.child(userIndex.toString()).setValue(pushPerson)
+            indexLabel.text = summary?.indexPerson.toString()
         } else {
             Log.w("FireBase", "Push to persons fail")
         }
