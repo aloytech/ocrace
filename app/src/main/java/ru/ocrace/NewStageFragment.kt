@@ -62,11 +62,10 @@ class NewStageFragment: Fragment() {
     }
 
     private fun writeStage(stage: String){
-        val name = inputStageName.text.toString()
 
         if (currentRace != null) {
             val dbRefCurrentRace = database.getReference(currentRace.toString())
-            dbRefCurrentRace.child(name).setValue(name)
+            dbRefCurrentRace.child(stage).setValue(stage)
         } else {
             Log.w("CurrentRace", "Race Not Selected")
             Toast.makeText(this.context,"Race not selected",Toast.LENGTH_SHORT).show()
