@@ -19,27 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/youAreIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="You are in: "
-        android:textSize="25sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/current_race_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="---------------"
-        android:background="@color/green_300"
-        android:textSize="25sp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/youAreIn" />
 
     <ListView
         android:id="@+id/list_race_select"

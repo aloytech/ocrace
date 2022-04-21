@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.TextView
-
+import android.widget.Toolbar
 
 
 const val ARG_BLANK = "blank"
 
 class BlankFragment : Fragment() {
 
-    private lateinit var currentRaceLabel: TextView
+
     private lateinit var listRaceSelect: ListView
 
     override fun onCreateView(
@@ -32,7 +32,7 @@ class BlankFragment : Fragment() {
         initSelectRaceTab(view)
     }
     private fun initSelectRaceTab(view: View){
-        currentRaceLabel = view.findViewById(R.id.current_race_label)
+
         listRaceSelect = view.findViewById(R.id.list_race_select)
         getRacesFromFB(view,listRaceSelect)
         listRaceSelect.onItemClickListener = itemClickListener
@@ -40,7 +40,10 @@ class BlankFragment : Fragment() {
 
     private val itemClickListener = AdapterView.OnItemClickListener { p0, p1, p2, p3 ->
         val itemValue = p0.getItemAtPosition(p2) as String
-        currentRaceLabel.text = itemValue
+        val currentRaceLabel = activity?.findViewById<TextView>(R.id.current_race_label)
+        if (currentRaceLabel != null) {
+            currentRaceLabel.text = itemValue
+        }
         currentRace=itemValue.substring(0..1).trim().toInt()
     }
 

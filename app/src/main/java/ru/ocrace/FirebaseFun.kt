@@ -42,3 +42,22 @@ fun getRacesFromFB(view: View, listView: ListView) {
     val dbRefRaces = database.getReference(dbTableRaces)
     dbRefRaces.addValueEventListener(raceListener)
 }
+fun getChildListFromFB(view: View, listView: ListView, dbIndex:String) {
+    val childListener = object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            val list = mutableListOf<String>()
+            for (child in snapshot.children) {
+                list.add(child.key.toString())
+            }
+            val listAdapter =
+                ArrayAdapter(view.context, R.layout.simple_list_item_1, list)
+            listView.adapter = listAdapter
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            Log.w("FireBase", "Get from db fail")
+        }
+    }
+    val dbRef= database.getReference(dbIndex)
+    dbRef.addValueEventListener(childListener)
+}
