@@ -29,7 +29,7 @@ class NewStageFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        arguments?.takeIf { it.containsKey("Stages") }?.apply {
+        arguments?.takeIf { it.containsKey(dbTableStages) }?.apply {
         }
         initCreateStageTab(view)
     }
@@ -65,7 +65,7 @@ class NewStageFragment: Fragment() {
 
         if (currentRace != null) {
             val dbRefCurrentRace = database.getReference(currentRace.toString())
-            dbRefCurrentRace.child(stage).setValue(stage)
+            dbRefCurrentRace.child(dbTableStages).child(stage).setValue(stage)
         } else {
             Log.w("CurrentRace", "Race Not Selected")
             Toast.makeText(this.context,"Race not selected",Toast.LENGTH_SHORT).show()

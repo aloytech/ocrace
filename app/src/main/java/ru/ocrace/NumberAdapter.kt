@@ -10,7 +10,7 @@ class NumberAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment)
 
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            3 -> {
+            4 -> {
                 val fragment = NewraceFragment()
 
                 fragment.arguments = Bundle().apply {
@@ -27,6 +27,14 @@ class NumberAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment)
                 }
             }
             2 -> {
+                val fragment = ParticipantFragment()
+
+                fragment.arguments = Bundle().apply {
+                    putInt(dbTableParticipants, position + 1)
+                    return fragment
+                }
+            }
+            3 -> {
                 val fragment = PersonFragment()
 
                 fragment.arguments = Bundle().apply {

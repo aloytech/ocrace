@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 data class Participant(
-    val raceId: Int? = null,
-    val number: Int? = null,
+    val raceId: String? = null,
+    val number: String? = null,
     val stage: String? = null,
     val start: String? = null,
     val finish: String? = null,

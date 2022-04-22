@@ -15,7 +15,9 @@ val database = Firebase.database
 const val dbTablePersons = "Persons"
 const val dbTableSummary = "Summary"
 const val dbTableRaces = "Races"
-val tabNameList = listOf("RACE", "STAGES", "PERSONS","NEWRACE", "CHART", "OBSTACLES")
+const val dbTableParticipants = "Participants"
+const val dbTableStages = "Stages"
+val tabNameList = listOf("RACE", "STAGES", "PARTs", "PERSONS","NEWRACE", "CHART", "OBSTACLES")
 var summary: Summary? = null
 var currentRace: Int? = null
 

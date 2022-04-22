@@ -54,31 +54,11 @@ class PersonFragment : Fragment() {
         indexLabel = view.findViewById(R.id.label_index)
 
 
-        getUsersFromFB(view)
+        getUsersFromFB(view,listViewPersons)
         getSummaryFromFB()
 
         indexLabel.text = summary?.indexPerson.toString()
 
-    }
-    private fun getUsersFromFB(view: View) {
-        val userListener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val listPersons = mutableListOf<String>()
-                for (user in snapshot.children) {
-                    val person = user.getValue(Person::class.java)
-                    listPersons.add(person.toString())
-                }
-                val listAdapter =
-                    ArrayAdapter(view.context, android.R.layout.simple_list_item_1, listPersons)
-                listViewPersons.adapter = listAdapter
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.w("FireBase", "Get from persons fail")
-            }
-        }
-        val dbChildPerson = database.getReference(dbTablePersons)
-        dbChildPerson.addValueEventListener(userListener)
     }
 
     private val listener = View.OnClickListener {

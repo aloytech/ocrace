@@ -58,6 +58,26 @@ fun getChildListFromFB(view: View, listView: ListView, dbIndex:String) {
             Log.w("FireBase", "Get from db fail")
         }
     }
-    val dbRef= database.getReference(dbIndex)
+    val dbRef= database.getReference(dbIndex).child(dbTableStages)
     dbRef.addValueEventListener(childListener)
+}
+fun getUsersFromFB(view: View,listView: ListView) {
+    val userListener = object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            val listPersons = mutableListOf<String>()
+            for (user in snapshot.children) {
+                val person = user.getValue(Person::class.java)
+                listPersons.add(person.toString())
+            }
+            val listAdapter =
+                ArrayAdapter(view.context, android.R.layout.simple_list_item_1, listPersons)
+            listView.adapter = listAdapter
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            Log.w("FireBase", "Get from persons fail")
+        }
+    }
+    val dbChildPerson = database.getReference(dbTablePersons)
+    dbChildPerson.addValueEventListener(userListener)
 }

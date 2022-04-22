@@ -19,5 +19,7 @@
     <string name="index_label">NUM:</string>
     <string name="select_category_stage">Select category/stage:</string>
     <string name="select_person">Select person:</string>
+    <string name="confirm_number_assignment">Please confirm number assignment:</string>
+    <string name="confirm_button">CONFIRM</string>
 
 </resources>
