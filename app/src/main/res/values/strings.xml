@@ -17,5 +17,7 @@
     <string name="enter_birth">Enter birth date</string>
     <string name="enter_date">Enter date</string>
     <string name="index_label">NUM:</string>
+    <string name="select_category_stage">Select category/stage:</string>
+    <string name="select_person">Select person:</string>
 
 </resources>
